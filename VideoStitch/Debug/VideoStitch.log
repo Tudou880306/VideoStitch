@@ -1,0 +1,180 @@
+﻿  MyWarper.cpp
+f:\github\videostitch\videostitch\mywarper.h(4): fatal error C1083: 无法打开包括文件: “opencv2/gpu/gpu.hpp”: No such file or directory
+  MyStitcher.cpp
+f:\github\videostitch\videostitch\mystitcher.h(47): fatal error C1083: 无法打开包括文件: “opencv2/stitching/stitcher.hpp”: No such file or directory
+  MySeamFinder.cpp
+f:\github\videostitch\videostitch\myseamfinder.cpp(14): error C3861: “LOGLN”: 找不到标识符
+f:\github\videostitch\videostitch\myseamfinder.cpp(24): error C2679: 二进制“=”: 没有找到接受“std::vector<cv::Mat,std::allocator<_Ty>>”类型的右操作数的运算符(或没有可接受的转换)
+          with
+          [
+              _Ty=cv::Mat
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(979): note: 可能是“std::vector<cv::UMat,std::allocator<_Ty>> &std::vector<_Ty,std::allocator<_Ty>>::operator =(const std::vector<_Ty,std::allocator<_Ty>> &)”
+          with
+          [
+              _Ty=cv::UMat
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(957): note: 或  “std::vector<cv::UMat,std::allocator<_Ty>> &std::vector<_Ty,std::allocator<_Ty>>::operator =(std::initializer_list<cv::UMat>)”
+          with
+          [
+              _Ty=cv::UMat
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(851): note: 或  “std::vector<cv::UMat,std::allocator<_Ty>> &std::vector<_Ty,std::allocator<_Ty>>::operator =(std::vector<_Ty,std::allocator<_Ty>> &&) noexcept(<expr>)”
+          with
+          [
+              _Ty=cv::UMat
+          ]
+  f:\github\videostitch\videostitch\myseamfinder.cpp(24): note: 尝试匹配参数列表“(std::vector<cv::UMat,std::allocator<_Ty>>, std::vector<cv::Mat,std::allocator<_Ty>>)”时
+          with
+          [
+              _Ty=cv::UMat
+          ]
+          and
+          [
+              _Ty=cv::Mat
+          ]
+f:\github\videostitch\videostitch\myseamfinder.cpp(27): error C2065: “t”: 未声明的标识符
+f:\github\videostitch\videostitch\myseamfinder.cpp(27): error C3861: “LOGLN”: 找不到标识符
+f:\github\videostitch\videostitch\myseamfinder.cpp(38): error C2440: “初始化”: 无法从“cv::UMat”转换为“cv::Mat”
+  f:\github\videostitch\videostitch\myseamfinder.cpp(38): note: 无构造函数可以接受源类型，或构造函数重载决策不明确
+f:\github\videostitch\videostitch\myseamfinder.cpp(228): error C3861: “LOGLN”: 找不到标识符
+f:\github\videostitch\videostitch\myseamfinder.cpp(251): error C2065: “t”: 未声明的标识符
+f:\github\videostitch\videostitch\myseamfinder.cpp(251): error C3861: “LOGLN”: 找不到标识符
+  MyCompensator.cpp
+f:\github\videostitch\videostitch\mycompensator.h(6): fatal error C1083: 无法打开包括文件: “opencv2/gpu/gpumat.hpp”: No such file or directory
+  MyBlender.cpp
+f:\github\videostitch\videostitch\myblender.cpp(13): error C2653: “MyBlender”: 不是类或命名空间名称
+f:\github\videostitch\videostitch\myblender.cpp(14): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\github\videostitch\videostitch\myblender.cpp(15): error C2065: “use_gpu”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(19): error C2653: “gpu”: 不是类或命名空间名称
+f:\github\videostitch\videostitch\myblender.cpp(19): error C3861: “getCudaEnabledDeviceCount”: 找不到标识符
+f:\github\videostitch\videostitch\myblender.cpp(21): error C2065: “use_gpu”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(24): warning C4508: “cv::detail::MyBlender”: 函数应返回一个值；假定“void”返回类型
+f:\github\videostitch\videostitch\myblender.cpp(26): error C2653: “MyBlender”: 不是类或命名空间名称
+f:\github\videostitch\videostitch\myblender.cpp(26): error C2065: “Rect”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(26): error C2146: 语法错误: 缺少“)”(在标识符“dst_roi”的前面)
+f:\github\videostitch\videostitch\myblender.cpp(27): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+f:\github\videostitch\videostitch\myblender.cpp(27): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+f:\github\videostitch\videostitch\myblender.cpp(41): error C2653: “MyBlender”: 不是类或命名空间名称
+f:\github\videostitch\videostitch\myblender.cpp(41): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\github\videostitch\videostitch\myblender.cpp(41): error C2143: 语法错误: 缺少“,”(在“&”的前面)
+f:\github\videostitch\videostitch\myblender.cpp(43): error C2065: “img”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(43): error C2228: “.type”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(43): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(43): error C2065: “CV_8UC3”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(43): error C2065: “CV_16SC3”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(43): error C3861: “CV_Assert”: 找不到标识符
+f:\github\videostitch\videostitch\myblender.cpp(44): error C2065: “mask”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(44): error C2228: “.type”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(44): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(44): error C2065: “CV_8U”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(44): error C3861: “CV_Assert”: 找不到标识符
+f:\github\videostitch\videostitch\myblender.cpp(47): error C2065: “dst_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(47): error C2228: “.empty”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(47): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(48): error C2065: “dst_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(48): error C2228: “.create”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(48): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(48): error C2065: “dst_roi_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(48): error C2228: “.size”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(48): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(48): error C2065: “img”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(48): error C2228: “.type”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(48): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(49): error C2065: “dst_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(49): error C2228: “.setTo”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(49): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(49): error C2653: “Scalar”: 不是类或命名空间名称
+f:\github\videostitch\videostitch\myblender.cpp(49): error C3861: “all”: 找不到标识符
+f:\github\videostitch\videostitch\myblender.cpp(51): error C2065: “use_gpu”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(53): error C2065: “gpuDst_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(53): error C2228: “.upload”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(53): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(53): error C2065: “dst_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(58): error C2065: “tl”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(58): error C2228: “.x”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(58): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(58): error C2065: “dst_roi_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(59): error C2065: “tl”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(59): error C2228: “.y”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(59): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(59): error C2065: “dst_roi_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(61): error C2065: “use_gpu”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(66): error C3083: “gpu”:“::”左侧的符号必须是一种类型
+f:\github\videostitch\videostitch\myblender.cpp(66): error C3083: “device”:“::”左侧的符号必须是一种类型
+f:\github\videostitch\videostitch\myblender.cpp(66): error C2039: “cudaFeed”: 不是“cv”的成员
+  f:\github\videostitch\videostitch\myblender.cpp(9): note: 参见“cv”的声明
+f:\github\videostitch\videostitch\myblender.cpp(66): error C2065: “img”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(66): error C2065: “mask”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(66): error C2065: “gpuDst_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(66): error C3861: “cudaFeed”: 找不到标识符
+f:\github\videostitch\videostitch\myblender.cpp(69): error C2065: “img”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(69): error C2228: “.type”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(69): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(69): error C2065: “CV_8UC3”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(74): error C2065: “img”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(74): error C2228: “.rows”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(74): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(76): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\github\videostitch\videostitch\myblender.cpp(76): error C2143: 语法错误: 缺少“;”(在“<”的前面)
+f:\github\videostitch\videostitch\myblender.cpp(77): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\github\videostitch\videostitch\myblender.cpp(77): error C2143: 语法错误: 缺少“;”(在“*”的前面)
+f:\github\videostitch\videostitch\myblender.cpp(77): error C2065: “mask_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(77): error C2065: “mask”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(77): error C2228: “.ptr”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(77): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(78): error C2065: “dst_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(78): warning C4804: “>”: 在操作中使用类型“bool”不安全
+f:\github\videostitch\videostitch\myblender.cpp(78): error C2065: “dst_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(78): error C2228: “.ptr”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(78): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(78): error C2059: 语法错误:“>”
+f:\github\videostitch\videostitch\myblender.cpp(79): error C2065: “dst_mask_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(79): error C2065: “dst_mask_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(79): error C2228: “.ptr”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(79): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(81): error C2065: “img”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(81): error C2228: “.cols”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(81): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(83): error C2065: “mask_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(84): error C2065: “dst_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(84): error C2065: “src_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(85): error C2065: “dst_mask_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(85): error C2065: “mask_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(94): error C2065: “img”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(94): error C2228: “.rows”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(94): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(96): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\github\videostitch\videostitch\myblender.cpp(96): error C2143: 语法错误: 缺少“;”(在“<”的前面)
+f:\github\videostitch\videostitch\myblender.cpp(97): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\github\videostitch\videostitch\myblender.cpp(97): error C2143: 语法错误: 缺少“;”(在“*”的前面)
+f:\github\videostitch\videostitch\myblender.cpp(97): error C2065: “mask_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(97): error C2065: “mask”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(97): error C2228: “.ptr”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(97): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(98): error C2062: 意外的类型“short”
+f:\github\videostitch\videostitch\myblender.cpp(99): error C2065: “dst_mask_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(99): error C2065: “dst_mask_”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(99): error C2228: “.ptr”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(99): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(101): error C2065: “img”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(101): error C2228: “.cols”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(101): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(103): error C2065: “mask_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(104): error C2065: “dst_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(104): error C2065: “src_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(105): error C2065: “dst_mask_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(105): error C2065: “mask_row”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(111): error C2653: “MyBlender”: 不是类或命名空间名称
+f:\github\videostitch\videostitch\myblender.cpp(111): error C2653: “gpu”: 不是类或命名空间名称
+f:\github\videostitch\videostitch\myblender.cpp(111): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\github\videostitch\videostitch\myblender.cpp(111): error C2143: 语法错误: 缺少“,”(在“&”的前面)
+f:\github\videostitch\videostitch\myblender.cpp(112): error C2084: 函数“void cv::detail::feed(const int)”已有主体
+  f:\github\videostitch\videostitch\myblender.cpp(41): note: 参见“feed”的前一个定义
+f:\github\videostitch\videostitch\myblender.cpp(113): error C2065: “img”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(113): error C2228: “.type”的左边必须有类/结构/联合
+  f:\github\videostitch\videostitch\myblender.cpp(113): note: 类型是“unknown-type”
+f:\github\videostitch\videostitch\myblender.cpp(113): error C2065: “CV_8UC3”: 未声明的标识符
+f:\github\videostitch\videostitch\myblender.cpp(113): error C3861: “CV_Assert”: 找不到标识符
+f:\github\videostitch\videostitch\myblender.cpp(113): fatal error C1003: 错误计数超过 100；正在停止编译
+  正在生成代码...

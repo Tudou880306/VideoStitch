@@ -1,0 +1,5 @@
+﻿  VideoStitch.cpp
+f:\github\videostitch\videostitch\videostitch.cpp(113): warning C4244: “初始化”: 从“int64”转换到“int”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(139): warning C4244: “初始化”: 从“int64”转换到“int”，可能丢失数据
+  VideoStitch.vcxproj -> F:\GitHub\VideoStitch\x64\Debug\VideoStitch.exe
+  VideoStitch.vcxproj -> F:\GitHub\VideoStitch\x64\Debug\VideoStitch.pdb (Full PDB)
