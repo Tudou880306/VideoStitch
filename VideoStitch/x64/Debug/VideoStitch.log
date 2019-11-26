@@ -1,5 +1,18 @@
 ﻿  VideoStitch.cpp
-f:\github\videostitch\videostitch\videostitch.cpp(113): warning C4244: “初始化”: 从“int64”转换到“int”，可能丢失数据
-f:\github\videostitch\videostitch\videostitch.cpp(139): warning C4244: “初始化”: 从“int64”转换到“int”，可能丢失数据
-  VideoStitch.vcxproj -> F:\GitHub\VideoStitch\x64\Debug\VideoStitch.exe
-  VideoStitch.vcxproj -> F:\GitHub\VideoStitch\x64\Debug\VideoStitch.pdb (Full PDB)
+f:\github\videostitch\videostitch\videostitch.cpp(66): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(67): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(76): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(77): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(86): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(87): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(96): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(97): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(103): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(127): warning C4244: “=”: 从“double”转换到“uchar”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(128): warning C4244: “=”: 从“double”转换到“uchar”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(129): warning C4244: “=”: 从“double”转换到“uchar”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(198): warning C4244: “初始化”: 从“int64”转换到“int”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(226): warning C4244: “初始化”: 从“int64”转换到“int”，可能丢失数据
+f:\github\videostitch\videostitch\videostitch.cpp(362): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+  VideoStitch.vcxproj -> F:\GitHub\VideoStitch\x64\Debug\VideoStitchd.exe
+  VideoStitch.vcxproj -> F:\GitHub\VideoStitch\x64\Debug\VideoStitchd.pdb (Full PDB)

@@ -1,14 +1,26 @@
 ﻿  VideoStitch.cpp
-VideoStitch.cpp(57): warning C4474: sprintf_s: 格式字符串中传递的参数太多
-  VideoStitch.cpp(57): note: 占位符和其参数预计 0 可变参数，但提供的却是 1 参数
-VideoStitch.cpp(66): warning C4474: sprintf_s: 格式字符串中传递的参数太多
-  VideoStitch.cpp(66): note: 占位符和其参数预计 0 可变参数，但提供的却是 1 参数
-VideoStitch.cpp(126): warning C4244: “初始化”: 从“int64”转换到“int”，可能丢失数据
-VideoStitch.cpp(152): warning C4244: “初始化”: 从“int64”转换到“int”，可能丢失数据
+VideoStitch.cpp(60): warning C4474: sprintf_s: 格式字符串中传递的参数太多
+  VideoStitch.cpp(60): note: 占位符和其参数预计 0 可变参数，但提供的却是 1 参数
+VideoStitch.cpp(70): warning C4474: sprintf_s: 格式字符串中传递的参数太多
+  VideoStitch.cpp(70): note: 占位符和其参数预计 0 可变参数，但提供的却是 1 参数
+VideoStitch.cpp(147): warning C4244: “=”: 从“double”转换到“uchar”，可能丢失数据
+VideoStitch.cpp(148): warning C4244: “=”: 从“double”转换到“uchar”，可能丢失数据
+VideoStitch.cpp(149): warning C4244: “=”: 从“double”转换到“uchar”，可能丢失数据
+VideoStitch.cpp(175): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+VideoStitch.cpp(176): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+VideoStitch.cpp(185): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+VideoStitch.cpp(186): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+VideoStitch.cpp(195): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+VideoStitch.cpp(196): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+VideoStitch.cpp(205): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+VideoStitch.cpp(206): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+VideoStitch.cpp(227): warning C4244: “初始化”: 从“int64”转换到“int”，可能丢失数据
+VideoStitch.cpp(253): warning C4244: “初始化”: 从“int64”转换到“int”，可能丢失数据
+VideoStitch.cpp(317): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
   正在生成代码
-  6 of 594 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
+  35 of 640 functions ( 5.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
   VideoStitch.vcxproj -> F:\GitHub\VideoStitch\x64\Release\VideoStitch.exe
   VideoStitch.vcxproj -> F:\GitHub\VideoStitch\x64\Release\VideoStitch.pdb (Full PDB)
