@@ -33,9 +33,10 @@ using namespace std;
 using namespace xfeatures2d;
 vector<Mat> images1;
 vector<Mat> images2;
-Mat H;
+vector<Mat> images3;
+Mat H_right,H_left;
 std::mutex g_io_mutex;
-
+VideoWriter videowriterSrc, videowriterDst;
 typedef struct
 {
 	Point2f left_top;
@@ -43,7 +44,7 @@ typedef struct
 	Point2f right_top;
 	Point2f right_bottom;
 }four_corners_t;
-four_corners_t corners;
+four_corners_t corners_right,corners_left;
 
 void readme();
 int file_exists(char *filename)
@@ -52,7 +53,7 @@ int file_exists(char *filename)
 }
 
 //计算变形后的图像四个角位置
-void CalcCorners(const Mat& H, const Mat& src)
+void CalcCorners(const Mat& H, const Mat& src, four_corners_t &corners)
 {
 	double v2[] = { 0, 0, 1 };//左上角
 	double v1[3];//变换后的坐标值
@@ -98,12 +99,13 @@ void CalcCorners(const Mat& H, const Mat& src)
 
 }
 //根据距离，计算权重，消除拼接处痕迹
-void OptimizeSeam(Mat& img1, Mat& trans, Mat& dst)
+void OptimizeSeam(Mat& img1, Mat& trans, Mat& dst, four_corners_t corners)
 {
 	int start = MIN(corners.left_top.x, corners.left_bottom.x);;//开始位置，即重叠区域的左边界  
 
 	double processWidth = img1.cols - start;//重叠区域的宽度  
-	int rows = dst.rows;
+	//int rows = dst.rows;
+	int rows = MIN(img1.rows,trans.rows);
 	int cols = img1.cols; //注意，是列数*通道数
 	double alpha = 1;//img1中像素的权重  
 	for (int i = 0; i < rows; i++)
@@ -139,18 +141,22 @@ void readframe()
 	int j = 0;
 	int64 old = 0;
 	// Load the images
-	cv::VideoCapture capture("2.mp4");
-	cv::VideoCapture capture2("1.mp4");
+	//cv::VideoCapture capture("rtmp://hn.uniseas.com.cn:10935/hls/stream_3");
+	//cv::VideoCapture capture2("rtmp://hn.uniseas.com.cn:10935/hls/stream_2");
+	//cv::VideoCapture capture3("rtmp://hn.uniseas.com.cn:10935/hls/stream_1");
+	cv::VideoCapture capture("test_right1.mp4");
+	cv::VideoCapture capture2("test_middle1.mp4");
+	cv::VideoCapture capture3("test_left1.mp4");
 	/*cv::VideoCapture capture("result2.avi");
 	cv::VideoCapture capture2("result1.avi");*/
-	Mat image1,image2;
+	Mat image1,image2,image3;
 	while (true)
 	{
 		try
 		{
 			int64 temps = getTickCount();
 
-			cout << "read image time:" << temps - old << endl;
+			//cout << "read image time:" << temps - old << endl;
 			old = temps;
 			j++;
 			//char iname[256] = { '0' };
@@ -158,6 +164,7 @@ void readframe()
 			//sprintf_s(iname, "1.jpg", j);
 			//Mat image1 = imread(iname);
 			capture >> image1;
+			//image1 = imread("52.png");
 			if (image1.empty())
 			{
 				return;
@@ -168,55 +175,70 @@ void readframe()
 			//sprintf_s(iname2, "2.jpg", j);
 			//Mat image2 = imread(iname2);
 			capture2 >> image2;
+			//image2 = imread("02.png");
 			if (image2.empty())
+			{
+				return;
+			}
+
+			capture3 >> image3;
+			if (image3.empty())
 			{
 				return;
 			}
 			g_io_mutex.lock();
 			
-			int width = image1.cols;
-			int height = image1.rows;
+			
+			cv::Mat imag1 = Mat::zeros(image1.rows/2, image1.cols/2, CV_8UC3);// = cv::resize(image1, (width / 2, height / 2), cv::INTER_CUBIC);
+			cv::Mat imag2 = Mat::zeros(image2.rows/2, image2.cols/2, CV_8UC3); //cv::resize(image2, (width / 2, height / 2), cv::INTER_CUBIC);
 
-			cv::Mat imag1 = Mat::zeros( height / 2, width / 2, CV_8UC3);// = cv::resize(image1, (width / 2, height / 2), cv::INTER_CUBIC);
-			cv::Mat imag2 = Mat::zeros(height / 2, width / 2, CV_8UC3); //cv::resize(image2, (width / 2, height / 2), cv::INTER_CUBIC);
+			cv::Mat imag3 = Mat::zeros(image3.rows/2 , image3.cols/2,CV_8UC3);
+
 			resize(image1, imag1, imag1.size());
 			resize(image2, imag2, imag2.size());
-			
+			resize(image3, imag3, imag3.size());
+
 			images1.push_back(imag1);
 			images2.push_back(imag2);
+			images3.push_back(imag3);
+
 			g_io_mutex.unlock();
 			
 			Mat gray_image1;
 			Mat gray_image2;
+			Mat gray_image3;
 			// Convert to Grayscale
 			cvtColor(imag1, gray_image1, CV_RGB2GRAY);
 			cvtColor(imag2, gray_image2, CV_RGB2GRAY);
+			cvtColor(imag3, gray_image3, CV_RGB2GRAY);
 		/*	imag1.copyTo(gray_image1);
 			imag2.copyTo(gray_image2);*/
 			waitKey(25);
 
 			int temp = getTickCount();
-			//-- Step 1: Detect the keypoints using SURF Detector
-			int minHessian = 600;
-			Ptr<Feature2D>  extractor = SURF::create();
-			//SurfFeatureDetector detector(minHessian);
-
-			std::vector< KeyPoint > keypoints_object, keypoints_scene;
-
-			//detector.detect(gray_image1, keypoints_object);
-			//detector.detect(gray_image2, keypoints_scene);
-
-			//-- Step 2: Calculate descriptors (feature vectors)
-			//SurfDescriptorExtractor extractor;
-
-			Mat descriptors_object, descriptors_scene;
+			
 			static bool flag = true;
 			//extractor.compute(gray_image1, keypoints_object, descriptors_object);
 			//extractor.compute(gray_image2, keypoints_scene, descriptors_scene);
 			if (flag)
 			{
-				if (!file_exists("H_martix.txt"))
+				if (!file_exists("H_martix_right.txt")||!file_exists("H_martix_left.txt"))
 				{
+					//-- Step 1: Detect the keypoints using SURF Detector
+					int minHessian = 600;
+					Ptr<Feature2D>  extractor = SURF::create();
+					//SurfFeatureDetector detector(minHessian);
+
+					std::vector< KeyPoint > keypoints_object, keypoints_scene;
+
+					//detector.detect(gray_image1, keypoints_object);
+					//detector.detect(gray_image2, keypoints_scene);
+
+					//-- Step 2: Calculate descriptors (feature vectors)
+					//SurfDescriptorExtractor extractor;
+
+					Mat descriptors_object, descriptors_scene;
+					Mat descriptors_object_left, descriptors_scene_left;
 					extractor->detectAndCompute(gray_image1, Mat(), keypoints_object, descriptors_object);
 					extractor->detectAndCompute(gray_image2, Mat(), keypoints_scene, descriptors_scene);
 					//-- Step 3: Matching descriptor vectors using FLANN matcher
@@ -224,8 +246,8 @@ void readframe()
 					std::vector< DMatch > matches;
 					matcher.match(descriptors_object, descriptors_scene, matches);
 					int temp3 = getTickCount();
-					cout << "feature time：" << temp3 - temp << endl;
-					double max_dist = 0; double min_dist = 100;
+					//cout << "feature time：" << temp3 - temp << endl;
+					double max_dist = 0; double min_dist = 200;
 
 					//-- Quick calculation of max and min distances between keypoints
 					for (int i = 0; i < descriptors_object.rows; i++)
@@ -272,15 +294,15 @@ void readframe()
 					imshow("second image", gray_image2);
 					waitKey(1);
 					// Find the Homography Matrix
-					H = findHomography(obj, scene, RANSAC);
-					CalcCorners(H, gray_image1);
-					cout << H << endl;
+					H_right = findHomography(obj, scene, RANSAC);
+					CalcCorners(H_right, gray_image1,corners_right);
+					cout << H_right << endl;
 					fstream f("H_martix.txt", ios::out);
-					for (int i = 0; i<H.rows; i++)
+					for (int i = 0; i<H_right.rows; i++)
 					{
-						for (int j = 0; j<H.cols; j++)
+						for (int j = 0; j<H_right.cols; j++)
 						{
-							double value = H.at<double>(i, j); //写入数据
+							double value = H_right.at<double>(i, j); //写入数据
 							cout << value << endl;;
 							f << value << "\n";
 						}
@@ -288,16 +310,16 @@ void readframe()
 					}
 					f.close();
 
-					cout << "left_top:" << corners.left_top << endl;
-					cout << "left_bottom:" << corners.left_bottom << endl;
-					cout << "right_top:" << corners.right_top << endl;
-					cout << "right_bottom:" << corners.right_bottom << endl;
+					cout << "left_top:" << corners_right.left_top << endl;
+					cout << "left_bottom:" << corners_right.left_bottom << endl;
+					cout << "right_top:" << corners_right.right_top << endl;
+					cout << "right_bottom:" << corners_right.right_bottom << endl;
 					flag = false;
 				}
 				else
 				{
-					H.zeros(cv::Size(3, 3), CV_64FC1);
-					ifstream ifile1("H_martix.txt", ios::in);
+					H_right.zeros(cv::Size(3, 3), CV_64FC1);
+					ifstream ifile1("H_martix_right.txt", ios::in);
 					if (!ifile1)
 						cerr << "error_O_L" << endl;
 					string lineword;
@@ -310,12 +332,34 @@ void readframe()
 						vectemp.push_back(temp);
 						j++;
 					}
-					cv::Mat H1 = cv::Mat{ vectemp };
-					H = H1.reshape(0, 3).clone();
-					CalcCorners(H, gray_image1);
+					cv::Mat H1_right = cv::Mat{ vectemp };
+					H_right = H1_right.reshape(0, 3).clone();
+					CalcCorners(H_right, gray_image1,corners_right);
 					ifile1.close();
+
+					H_left.zeros(cv::Size(3, 3), CV_64FC1);
+					ifstream ifile2("H_martix_left.txt", ios::in);
+					if (!ifile2)
+						cerr << "error_O_L" << endl;
+					string lineword2;
+					int j2 = 0;
+					//std::vector<std::vector<double>> vec;
+					std::vector<double> vectemp2;
+					while (ifile2 >> lineword2)
+					{
+						double temp2 = atof(lineword2.c_str());
+						vectemp2.push_back(temp2);
+						j2++;
+					}
+					cv::Mat H1_left = cv::Mat{ vectemp2 };
+					H_left = H1_left.reshape(0, 3).clone();
+					CalcCorners(H_left, gray_image1,corners_left);
+					ifile2.close();
 				}
-				cout << H << endl;
+#ifdef _DEBUG
+				cout << H_right << endl;
+				cout << H_left << endl;
+#endif
 				flag = false;
 			}
 			//			continue;
@@ -338,54 +382,116 @@ void readframe()
 
 void output()
 {
-	VideoWriter writer;
+	//VideoWriter writer;
 	while (true)
 	{
-		Mat img1, img2;
+		Mat img1, img2,img3;
 		g_io_mutex.lock();
-		if (images1.empty()||images2.empty())
+		if (images1.empty()||images2.empty()||images3.empty())
 		{
 			g_io_mutex.unlock();
 			continue;
 		}
 		img1 = images1.front();		
 		images1.erase(images1.begin());
-		img2 = images2.front();
+	    img2 = images2.front();
 		images2.erase(images2.begin());
+		img3 = images3.front();
+		images3.erase(images3.begin());
 		g_io_mutex.unlock();
 		try
 		{
 
-			int64 temp2 = getTickCount();
+			clock_t start, end;
+			start = clock();
+		
 			// Use the Homography Matrix to warp the images
 			Mat imageTransform1, imageTransform2;
-			warpPerspective(img1, imageTransform1, H, Size(MAX(corners.right_top.x, corners.right_bottom.x), img2.rows));
+			warpPerspective(img1, imageTransform1, H_right, Size(MAX(corners_right.right_top.x, corners_right.right_bottom.x), MAX(corners_right.left_bottom.y, corners_right.right_bottom.y)));
+
+			
+
 			//warpPerspective(image01, imageTransform2, adjustMat*homo, Size(image02.cols*1.3, image02.rows*1.8));
-			imshow("直接经过透视矩阵变换", imageTransform1);
-			imwrite("trans1.jpg", imageTransform1);
-			waitKey(5);
+// 			imshow("直接经过透视矩阵变换", imageTransform1);
+// 			imwrite("trans1.jpg", imageTransform1);
+// 			waitKey(1);
 
 			//创建拼接后的图,需提前计算图的大小
-			int dst_width = imageTransform1.cols;  //取最右点的长度为拼接图的长度
-			int dst_height = img2.rows;
+			int dst_width = MAX(imageTransform1.cols,img2.cols);  //取最右点的长度为拼接图的长度
+			int dst_height = MAX(imageTransform1.rows,img2.rows);
 
-			Mat dst(dst_height, dst_width, CV_8UC3);
-			dst.setTo(0);
+			Mat dst_left(dst_height, dst_width, CV_8UC3);
+			dst_left.setTo(0);
 
-			imageTransform1.copyTo(dst(Rect(0, 0, imageTransform1.cols, imageTransform1.rows)));
-			img2.copyTo(dst(Rect(0, 0, img2.cols, img2.rows)));
+			/*imshow("imageTransform1", imageTransform1);
+			waitKey(5);*/
 
-			imshow("b_dst", dst);
-			OptimizeSeam(img2, imageTransform1, dst);
-			imshow("dst", dst);
-			imwrite("dst.jpg", dst);
+			imageTransform1.copyTo(dst_left(Rect(0, 0, imageTransform1.cols, imageTransform1.rows)));
+			img2.copyTo(dst_left(Rect(0, 0, img2.cols, img2.rows)));
+#ifdef _DEBUG
+			imshow("img2", img2);
+			waitKey(5);
+#endif
+//			imshow("b_dst", dst);
+			OptimizeSeam(img2, imageTransform1, dst_left,corners_right);
+
+			flip(img3, img3, 0);
+			flip(img3, img3, 1);
+
+			flip(dst_left, dst_left, 0);
+			flip(dst_left, dst_left, 1);
+#ifdef _DEBUG
+			imshow("dst_left", dst_left);
+			waitKey(5);
+			imshow("img3", img3);
+			waitKey(5);
+#endif
+			warpPerspective(img3, imageTransform2, H_left, Size(MAX(corners_left.right_top.x, corners_left.right_bottom.x), MAX(corners_left.left_bottom.y, corners_left.right_bottom.y)));
+
+
+
+			 dst_width = MAX(imageTransform2.cols, dst_left.cols);  //取最右点的长度为拼接图的长度
+			 dst_height =MAX(imageTransform2.rows, dst_left.rows);
+
+			Mat dst_right(dst_height, dst_width, CV_8UC3);
+			dst_right.setTo(0);
+#ifdef _DEBUG
+			imshow("imageTransform2", imageTransform2);
+			waitKey(5);
+#endif // DEBUG
+
+			
+
+			imageTransform2.copyTo(dst_right(Rect(0, 0, imageTransform2.cols, imageTransform2.rows)));
+			dst_left.copyTo(dst_right(Rect(0, 0, dst_left.cols, dst_left.rows)));
+
+			//			imshow("b_dst", dst);
+			OptimizeSeam(dst_left, imageTransform2, dst_right,corners_left);
+
+
+	
+			flip(dst_right, dst_right, 0);
+			flip(dst_right, dst_right, 1);
+
+			end = clock();
+			cout << "feature time：" << (end - start) << endl;
+ 			//imshow("dst_right", dst_right);
+			//waitKey(5);
+
+			cv::Mat dst = dst_right(Rect(0,160,dst_right.cols,330));
+			
+ 			//imwrite("dst_right.png", dst_right);
+			//imwrite("dst.png", dst);
 			static bool flag = true;
 			if (flag)
 			{
-				writer = VideoWriter("result.avi", CV_FOURCC('M', 'J', 'P', 'G'), 25, dst.size());
+				videowriterSrc = VideoWriter("resultSrc.avi", CV_FOURCC('M', 'J', 'P', 'G'), 25, dst_right.size());
+				videowriterDst = VideoWriter("resultDst.avi", CV_FOURCC('M', 'J', 'P', 'G'), 25, dst.size());
 				flag = false;
 			}
-			writer << dst;
+			videowriterSrc << dst_right;
+			videowriterDst << dst;
+			imshow("dst", dst);
 			waitKey(5);
 			//break;
 		}
